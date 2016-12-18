@@ -52,32 +52,40 @@ def main():
     file = open("popular_pairs.txt", 'r')
     file_result = open("trans_result.txt", 'a+')
     i = 0
-    # while i < 100:
-    # i += 1
-    #    line = file.readline()
-    #   line.strip()
-    # print(line)
-    # count_of_results = search_total_count(line)
-    # print(count_of_results)
-    # file_result.write(line + ' ' + count_of_results + ' ')
-    # trans_result = glosbe_search(line)
-    i = 0
-    while i < 882:
+    while i < 100:
         i += 1
-        line = file.readline().strip()
+        line = file.readline()
+        line.strip()
         print(line)
-        file_result.write(line + ' ')
-        t_result = glosbe_search(line)
-        for j in t_result:
+        count_of_results = search_total_count(line)
+        print(count_of_results)
+        file_result.write(line + ' ' + count_of_results + ' ')
+        line = line.replace('\n', '')
+        trans_result = glosbe_search(line)
+        for translation in trans_result:
             try:
-                file_result.write(j + ', ')
+                file_result.write(translation + ', ')
             except UnicodeEncodeError:
-                print("ok")
-        print(t_result)
+                print('skip')
         file_result.write('\n')
         time.sleep(1)
-    file.close()
-    file_result.close()
+        # i = 0
+        # while i < 882:
+        #     i += 1
+        #     line = file.readline().strip()
+        #     print(line)
+        #     file_result.write(line + ' ')
+        #     t_result = glosbe_search(line)
+        #     for j in t_result:
+        #         try:
+        #             file_result.write(j + ', ')
+        #         except UnicodeEncodeError:
+        #             print("ok")
+        #     print(t_result)
+        #     file_result.write('\n')
+        #     time.sleep(1)
+        file.close()
+        file_result.close()
 
 
 main()
